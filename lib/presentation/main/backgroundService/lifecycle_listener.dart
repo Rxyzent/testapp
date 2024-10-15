@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 
@@ -32,6 +34,10 @@ class _LifecycleListenerState extends State<LifecycleListener>  with WidgetsBind
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state == AppLifecycleState.detached){
+      print('detached');
+      IsolateNameServer.removePortNameMapping('main_thread_port');
+    }
     FlutterBackgroundService().invoke(
       'lifecycle',
       {'resumed': state == AppLifecycleState.resumed},

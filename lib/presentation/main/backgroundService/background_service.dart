@@ -19,6 +19,7 @@ void startService() {
 }
 
 void stopService() {
+  stopTimer();
   FlutterBackgroundService().invoke('stopService');
 }
 
@@ -93,7 +94,6 @@ void onStart(ServiceInstance service) async {
   service.on('lifecycle').listen((event) {
     foreground = event!['resumed'];
   });
-
 
   final currentPosition = await Geolocator.getCurrentPosition();
   final now = DateTime.now();

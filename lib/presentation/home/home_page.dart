@@ -33,7 +33,6 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
       print('message :$message');
       context.read<HomeCubit>().updateUserData(message);
     });
-
     if(isRegisterSuccessful){
       FlutterBackgroundService().invoke(
         'lifecycle',
@@ -44,6 +43,7 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
 
   @override
   void dispose() {
+    print('dispose');
     mainReceivePort.close();
     IsolateNameServer.removePortNameMapping('main_thread_port');
     super.dispose();
